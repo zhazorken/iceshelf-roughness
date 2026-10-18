@@ -82,7 +82,7 @@ for v in ["shear", "conv", "dns", "dnsF", "convP", "mixed"]:
     add("mac", "ens", "base", v, BASE, range(1, 5))
 for v in ["theta", "convF", "shearF"]:
     add("mac", "ens", "base", v, BASE, range(1, 4))
-for a in [0.0, 0.05, 0.1, 0.2, 0.4, 0.6, 0.761, 0.9]:
+for a in [0.0, 0.05, 0.1, 0.2, 0.3, 0.35, 0.4, 0.6, 0.761, 0.9]:
     for s in range(1, 3):
         regime, q = "convection", law(dict(BASE, seed=s), "dns", a)
         JOBS.append(dict(name=f"contrast__a{a:g}__s{s}", host="mac", group="contrast", label=f"{a:g}",
@@ -268,7 +268,7 @@ def _tag(n, host):
 for v in ["dns", "dnsF"]:
     add("zc", "ens", "base", v, BASE, range(1, 5)); _tag(4, "zc")
 add("zc", "ens", "base", "dnsQ", _q(BASE, QUIET), range(1, 5)); _tag(4, "zc")
-for f in [0.1, 0.35, 0.5, 2.0]:
+for f in [0.0, 0.01, 0.02, 0.05, 0.1, 0.35, 0.5, 2.0]:
     add("zc", "dns u*", f"{f:g}", "dns", _q(BASE, f), range(1, 3)); _tag(2, "zc")
 for v in ["dns", "dnsF"]:
     add("zc", "showcase", "pig", v, SHOW, [1]); _tag(1, "zc")

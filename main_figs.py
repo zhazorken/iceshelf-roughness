@@ -151,7 +151,7 @@ def fig3(R):
         ax.plot(sw[:, 1], sw[:, 2], "-", color=COL["dns"], lw=1.0, alpha=0.8, zorder=4)
         for f, Cc, Gg in sw:
             if f not in (1.0, 0.2): ax.plot(Cc, Gg, "o", ms=3, color=COL["dns"], mec="white", mew=0.4, zorder=5)
-            if f == min(sw[:, 0]): ax.annotate(f"DNS law, $u_*$ \u00d7{f:g}", (Cc, Gg), textcoords="offset points", xytext=(4, 4), fontsize=5.6, color=COL["dns"])
+            if f in (0.05, 0.1): ax.annotate(f"$u_*$\u00d7{f:g}", (Cc, Gg), textcoords="offset points", xytext=(4, -9 if f == 0.1 else -10), fontsize=5.6, color=COL["dns"])
     pts = {}
     for v in ["shear", "dns", "dnsQ", "conv", "theta", "plume", "dnsF", "plumeF", "convP", "convA"]:
         rs = sel(R, "ens", "base", v)
@@ -160,7 +160,7 @@ def fig3(R):
         ax.errorbar(Cv, g[0], yerr=g[1], fmt=MARK[v], ms=5, color=COL[v], mec="white", mew=0.6,
                     elinewidth=0.8, capsize=0, zorder=6)
     lab = {"shear": ((4, -14), "shear; DNS law, tidal\nand quiet water"), "conv": ((6, -3), "sin$^{2/3}$"),
-           "theta": ((-70, 8), "DNS convection,\n$u_*=0$"), "plume": ((7, -3), "plume law")}
+           "theta": ((-24, 9), "DNS convection,\n$u_*=0$"), "plume": ((-14, 7), "plume law")}
     for v, (off, t) in lab.items():
         if v in pts: ax.annotate(t, pts[v], textcoords="offset points", xytext=off, fontsize=6.2, color=COL[v],
                                  fontweight="semibold")
@@ -178,7 +178,7 @@ def fig3(R):
     ax.set_yticks([0.3, 0.5, 1, 2, 5, 10]); ax.set_yticklabels(["0.3", "0.5", "1", "2", "5", "10"])
     ax.set_xlabel("low-angle contrast $C_{10}$ (melt at 10° / shelf melt)")
     ax.set_ylabel("roughness gain $G$")
-    panel_label(ax, "a", x=-0.15); ax.set_title("Low-angle slope contrast sets the sign", fontsize=7.5)
+    panel_label(ax, "a", x=-0.15); ax.set_title("Extra melt on gentle slopes sets the sign", fontsize=7.5)
 
     ax = axs[1]; handles = []
     for v in ["shear", "dns", "dnsQ", "convP", "conv", "plume", "dnsF"]:
